@@ -6,8 +6,9 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# 변환된 이미지 파일을 저장할 폴더 (static/downloads)
-DOWNLOAD_FOLDER = os.path.join('static', 'downloads')
+# 절대경로 기반으로 다운로드 폴더 설정 (Heroku 호환성 ↑)
+basedir = os.path.abspath(os.path.dirname(__file__))
+DOWNLOAD_FOLDER = os.path.join(basedir, 'static', 'downloads')
 os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
@@ -36,7 +37,13 @@ def convert_pdf_to_jpg():
         pdf_bytes = pdf_file.read()
         
         # pdf2image를 이용해 PDF를 이미지로 변환 (여기서는 첫 페이지만 변환)
-        pages = convert_from_bytes(pdf_bytes, fmt='jpeg', first_page=1, last_page=1)
+        #pages = convert_from_bytes(pdf_bytes, fmt='jpeg', first_page=1, last_page=1)
+        # convert_from_bytes 호출 부분 변경
+        poppler_path = "/app/.heroku/poppler/bin"  # Heroku용 경로
+
+        # PDF → 이미지 변환
+        pages = convert_from_bytes(pdf_bytes, fmt='jpeg', first_page=1, last_page=1, poppler_path=poppler_path)
+
         if len(pages) == 0:
             return jsonify({'error': 'PDF 변환에 실패했습니다.'}), 500
         
@@ -61,5 +68,8 @@ def convert_pdf_to_jpg():
 # ----------------------------------------------------------------------
 # 3. 서버 실행
 # ----------------------------------------------------------------------
-if __name__ == '__main__':
+''' if __name__ == '__main__':
     app.run(debug=True)
+'''
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)

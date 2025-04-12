@@ -26,10 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
     submitButton.textContent = '변환 중...';
 
     // fetch를 이용하여 비동기 POST 요청 전송
-    fetch('/', {  // 서버의 URL은 Flask에서 라우팅한 엔드포인트에 맞게 조정
+    fetch(window.location.origin + '/', {  // 서버의 URL은 Flask에서 라우팅한 엔드포인트에 맞게 조정
       method: 'POST',
       body: formData
     })
+
+
     .then(response => {
       if (!response.ok) {
         throw new Error('서버 응답이 좋지 않습니다.');
