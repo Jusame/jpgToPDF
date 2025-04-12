@@ -1,0 +1,76 @@
+/* static/style.css */
+
+/* 전체 페이지 기본 스타일 설정 */
+body {
+  background-color: #f7f9fc; /* 부드러운 밝은 배경색 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* 헤더 스타일 */
+header {
+  background-color: #ff6f61; /* 밝은 코랄 색상 */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 메인 컨텐츠 영역 중앙정렬 및 여백 */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* 업로드 폼 디자인 */
+form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+/* 파일 입력 필드 스타일 */
+form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* 변환 버튼 스타일 */
+form button {
+  background-color: #8fd9a8; /* 신선한 라이트 그린 */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #7cc38f;
+}
+
+/* 변환 결과 출력 영역 */
+#result {
+  margin-top: 20px;
+  text-align: center;
+}
